@@ -33,3 +33,4 @@ RPC port:10555
 
 P2P port:10556
 
+addnode=78.24.221.136
