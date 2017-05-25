@@ -356,13 +356,14 @@ static QWidget* makeToolBarSpacer()
     QWidget* spacer = new QWidget();
     spacer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     //spacer->setStyleSheet(fUseBlackTheme ? "QWidget { background: rgb(30,32,36); }" : "QWidget { background: none; }");
-    spacer->setStyleSheet(fUseBlackTheme ? "QWidget { background: none; }" : "QWidget { background: none; }"); //фон боково меню
+    spacer->setStyleSheet(fUseBlackTheme ? "QWidget { background-image: url(:/images/bgb_free); }" : "QWidget { background-image: url(:/images/bgb_free); }"); //фон боково меню
     return spacer;
 }
 
 void BitcoinGUI::createToolBars()
 {
     toolbar = new QToolBar(tr("Tabs toolbar"));
+    toolbar->setStyleSheet("QWidget { background-repeat: no-repeat; background-image: url(:/images/bkg); border-color: red; }");
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar->setContextMenuPolicy(Qt::PreventContextMenu);
 
@@ -372,7 +373,7 @@ void BitcoinGUI::createToolBars()
         header->setMinimumSize(160, 160);
         header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 //header->setStyleSheet("QWidget { background-color: rgb(24,26,30); background-repeat: no-repeat; background-image: url(:/images/header); background-position: top center; }");
-        header->setStyleSheet("QWidget { background-color: none; background-repeat: no-repeat; background-image: url(:/images/header); background-position: top center; }");
+        header->setStyleSheet("QWidget { alternate-background-color: red; background-repeat: no-repeat; background-image: url(:/images/header); background-position: top center; }");
         toolbar->addWidget(header);
         toolbar->addWidget(makeToolBarSpacer());
     }
@@ -380,7 +381,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(overviewAction);
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(sendCoinsAction);
-    toolbar->setStyleSheet("background-image: url(:/images/bkg);");
+//    toolbar->setStyleSheet("background-image: url(:/images/bkg);");
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
     toolbar->addWidget(makeToolBarSpacer());
@@ -451,7 +452,7 @@ void BitcoinGUI::setWalletModel(WalletModel *walletModel)
 
         // Put transaction list in tabs
         transactionView->setModel(walletModel);
-        transactionView->setStyleSheet("QWidget { background-image: url(:/images/bgb); background-repeat: repeat; color: black ;selection-background-color: darkgray; alternate-background-color: rgb(170, 170, 255);border-top-color: rgb(255, 0, 0);selection-color: black; }");
+        transactionView->setStyleSheet("QWidget { background-image: url(:/images/bgb); background-repeat: repeat; gridline-color: rgb(255, 255, 255); color: darkblue ;selection-background-color: darkgray; alternate-background-color: blue;border-top-color: red;selection-color: blue; }");
         overviewPage->setWalletModel(walletModel);
         overviewPage->setStyleSheet("background-image: none; background-repeat: no-repeat; color: black ;");
         addressBookPage->setModel(walletModel->getAddressTableModel());
@@ -477,6 +478,7 @@ void BitcoinGUI::createTrayIcon()
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
     trayIconMenu = new QMenu(this);
+//    trayIconMenu->>setStyleSheet("QWidget { background-repeat: no-repeat; background-image: url(:/images/bkg); border-color: red; }");
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setToolTip(tr("GeyserCoin client"));
     trayIcon->setIcon(QIcon(":/icons/toolbar"));
