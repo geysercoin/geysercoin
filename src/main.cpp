@@ -47,7 +47,7 @@ unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier 
 int nCoinbaseMaturity = 120;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
-int stepPOW_POS=5040;
+int stepPOW_POS=-1;
 
 uint256 nBestChainTrust = 0;
 uint256 nBestInvalidTrust = 0;
@@ -953,6 +953,13 @@ int GetLastPowBlock()
 {
 
     int RColP;
+    if (nBestHeight<20160)
+    {
+        stepPOW_POS=5040;
+    } else if (nBestHeight>=20160)
+    {
+        stepPOW_POS=10080;
+    }
     if (nBestHeight < 10080 )
     {
         LAST_POW_BLOCK = 5040;

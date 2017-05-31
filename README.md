@@ -1,18 +1,13 @@
-
 GeyserCoin development tree
 
-GeyserCoin is a PoW/PoS-based cryptocurrency.
-
-Development tree
+GeyserKoin - Crypto currency is based on PoW / PoS.
 ===========================
 
-Geysercoin is a PoW/PoS-based cryptocurrency.
-
-Algorithm: Scrypt
+Algorithm: scrypt
 
 Ticker: GSR
 
-Reward:3 GSR
+Address letter: "G"
 
 Total coin supply:4500000
 
@@ -22,15 +17,18 @@ Coinbase maturity:120 Block
 
 Confirmations:10
 
-PoW : 3 coin to block (Change to PoS after next 5040 blocks)
-PoS : 100% 1st PoS block start at block 5040 (Change to PoW after next 5040 blocks)
-
-Minimum coin age:6 hours
+PoW: 3 coins reward per block
+(Transition to PoS after the next 5040 blocks)
 
 PoS interest:100%
+During phase PoW - PoS turns off
+(Transition to PoW after 5040 blocks)
 
-RPC port:10555
+Minimum age of coin: 6 hours
 
-P2P port:10556
 
-addnode=78.24.221.136
+RPC port: 10555
+
+P2P port: 10556
+
+ADDNODE = 78.24.221.136
