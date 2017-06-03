@@ -1,6 +1,6 @@
 GeyserCoin development tree
 
-GeyserKoin - Crypto currency is based on PoW / PoS.
+GeyserCoin - Crypto currency is based on PoW / PoS.
 ===========================
 
 Algorithm: scrypt
