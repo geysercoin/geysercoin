@@ -13,7 +13,9 @@ Coinbase maturity:120 Blocks
 
 Confirmations:10 Blocks
 
-PoW revard: 3 coins reward per block
+PoW reward: 3 coins reward per block
+after block 100800 reward: 1.5 coins per block
+After block 201600 reward: 0.75 conins per block
 (Started on 1-st block
 Transition to PoS after the next 10080 PoS blocks)
 
@@ -31,3 +33,4 @@ P2P port: 10556
 
 ADDNODE = 78.24.221.136
 ADDNODE = 92.51.46.40
+ADDNODE = 87.98.142.204
