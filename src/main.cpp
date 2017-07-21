@@ -988,7 +988,7 @@ unsigned int GetnStakeMinAge()
 {
     if (nBestHeight < GetLastPowBlock())
     {
-    nStakeMinAge= 365 * 24 * 60 * 60;
+    nStakeMinAge= 5 * 365 * 24 * 60 * 60;
     } else {
         nStakeMinAge = 6 * 60 * 60; /// min age 6 hour/
     }
@@ -1007,6 +1007,14 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
         else if(pindexBest->nHeight >= 1)
     {
         nSubsidy = 3 * COIN;
+    }
+        else if(pindexBest->nHeight >= 100800)
+    {
+        nSubsidy = 1.5 * COIN;
+    }
+        else if(pindexBest->nHeight >= 201600)
+    {
+        nSubsidy = 0.75 * COIN;
     }
     return nSubsidy + nFees;
 }
