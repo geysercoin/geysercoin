@@ -66,6 +66,7 @@ sudo apt-get install libssl-dev
 sudo apt-get install libdb++-dev
 sudo apt-get install libboost-all-dev
 sudo apt-get install libqrencode-dev
+sudo apt-get install libminiupnpc-dev
 
 If using Boost 1.37, append -mt to the boost libraries in the makefile.
 
