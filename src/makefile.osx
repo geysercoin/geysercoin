@@ -50,17 +50,12 @@ endif
 DEFS=-DMAC_OSX -DMSG_NOSIGNAL=0 -DBOOST_SPIRIT_THREADSAFE
 
 ifdef RELEASE
-CFLAGS = -mmacosx-version-min=10.5 -O3
 # Compile for maximum compatibility and smallest size.
 # This requires that dependencies are compiled
 # the same way.
-ifdef 64BIT
-CFLAGS += -arch x86_64
+CFLAGS = -mmacosx-version-min=10.5 -arch x86_64 -O2 -msse2
 else
-CFLAGS += -arch i386
-endif
-else
-CFLAGS = -g
+CFLAGS = -g -msse2
 endif
 
 # ppc doesn't work because we don't support big-endian
