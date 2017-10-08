@@ -30,7 +30,7 @@ void MacNotificationHandler::showNotification(const QString &title, const QStrin
     }
 }
 
-// sendAppleScript just take a QString and executes it as apple script
+//  sendAppleScript just take a QString and executes it as apple script
 void MacNotificationHandler::sendAppleScript(const QString &script)
 {
     QByteArray utf8 = script.toUtf8();
