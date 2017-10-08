@@ -1,131 +1,65 @@
-#include "macdockiconhandler.h"
-
-#include <QImageWriter>
-#include <QMenu>
-#include <QBuffer>
-#include <QWidget>
+#include "macnotificationhandler.h"
 
 #undef slots
 #include <Cocoa/Cocoa.h>
 
-#if QT_VERSION < 0x050000
-extern void qt_mac_set_dock_menu(QMenu *);
-#endif
-
-@interface DockIconClickEventHandler : NSObject
+void MacNotificationHandler::showNotification(const QString &title, const QString &text)
 {
-    MacDockIconHandler* dockIconHandler;
-}
+    // check if users OS has support for NSUserNotification
+    if(this->hasUserNotificationCenterSupport()) {
+        // okay, seems like 10.8+
+        QByteArray utf8 = title.toUtf8();
+        char* cString = (char *)utf8.constData();
+        NSString *titleMac = [[NSString alloc] initWithUTF8String:cString];
 
-@end
+        utf8 = text.toUtf8();
+        cString = (char *)utf8.constData();
+        NSString *textMac = [[NSString alloc] initWithUTF8String:cString];
 
-@implementation DockIconClickEventHandler
+        // do everything weak linked (because we will keep <10.8 compatibility)
+        id userNotification = [[NSClassFromString(@"NSUserNotification") alloc] init];
+        [userNotification performSelector:@selector(setTitle:) withObject:titleMac];
+        [userNotification performSelector:@selector(setInformativeText:) withObject:textMac];
 
-- (id)initWithDockIconHandler:(MacDockIconHandler *)aDockIconHandler
-{
-    self = [super init];
-    if (self) {
-        dockIconHandler = aDockIconHandler;
+        id notificationCenterInstance = [NSClassFromString(@"NSUserNotificationCenter") performSelector:@selector(defaultUserNotificationCenter)];
+        [notificationCenterInstance performSelector:@selector(deliverNotification:) withObject:userNotification];
 
-        [[NSAppleEventManager sharedAppleEventManager]
-            setEventHandler:self
-                andSelector:@selector(handleDockClickEvent:withReplyEvent:)
-              forEventClass:kCoreEventClass
-                 andEventID:kAEReopenApplication];
-    }
-    return self;
-}
-
-- (void)handleDockClickEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
-{
-    Q_UNUSED(event)
-    Q_UNUSED(replyEvent)
-
-    if (dockIconHandler) {
-        dockIconHandler->handleDockIconClickEvent();
+        [titleMac release];
+        [textMac release];
+        [userNotification release];
     }
 }
 
-@end
-
-MacDockIconHandler::MacDockIconHandler() : QObject()
+// sendAppleScript just take a QString and executes it as apple script
+void MacNotificationHandler::sendAppleScript(const QString &script)
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    QByteArray utf8 = script.toUtf8();
+    char* cString = (char *)utf8.constData();
+    NSString *scriptApple = [[NSString alloc] initWithUTF8String:cString];
 
-    this->m_dockIconClickEventHandler = [[DockIconClickEventHandler alloc] initWithDockIconHandler:this];
-    this->m_dummyWidget = new QWidget();
-    this->m_dockMenu = new QMenu(this->m_dummyWidget);
-    this->setMainWindow(NULL);
-#if QT_VERSION < 0x050000
-    qt_mac_set_dock_menu(this->m_dockMenu);
-#endif
-    [pool release];
+    NSAppleScript *as = [[NSAppleScript alloc] initWithSource:scriptApple];
+    NSDictionary *err = nil;
+    [as executeAndReturnError:&err];
+    [as release];
+    [scriptApple release];
 }
 
-void MacDockIconHandler::setMainWindow(QMainWindow *window) {
-    this->mainWindow = window;
-}
-
-MacDockIconHandler::~MacDockIconHandler()
+bool MacNotificationHandler::hasUserNotificationCenterSupport(void)
 {
-    [this->m_dockIconClickEventHandler release];
-    delete this->m_dummyWidget;
-    this->setMainWindow(NULL);
-}
+    Class possibleClass = NSClassFromString(@"NSUserNotificationCenter");
 
-QMenu *MacDockIconHandler::dockMenu()
-{
-    return this->m_dockMenu;
-}
-
-void MacDockIconHandler::setIcon(const QIcon &icon)
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSImage *image = nil;
-    if (icon.isNull())
-        image = [[NSImage imageNamed:@"NSApplicationIcon"] retain];
-    else {
-        // generate NSImage from QIcon and use this as dock icon.
-        QSize size = icon.actualSize(QSize(128, 128));
-        QPixmap pixmap = icon.pixmap(size);
-
-        // Write image into a R/W buffer from raw pixmap, then save the image.
-        QBuffer notificationBuffer;
-        if (!pixmap.isNull() && notificationBuffer.open(QIODevice::ReadWrite)) {
-            QImageWriter writer(&notificationBuffer, "PNG");
-            if (writer.write(pixmap.toImage())) {
-                NSData* macImgData = [NSData dataWithBytes:notificationBuffer.buffer().data()
-                                             length:notificationBuffer.buffer().size()];
-                image =  [[NSImage alloc] initWithData:macImgData];
-            }
-        }
-
-        if(!image) {
-            // if testnet image could not be created, load std. app icon
-            image = [[NSImage imageNamed:@"NSApplicationIcon"] retain];
-        }
+    // check if users OS has support for NSUserNotification
+    if(possibleClass!=nil) {
+        return true;
     }
-
-    [NSApp setApplicationIconImage:image];
-    [image release];
-    [pool release];
+    return false;
 }
 
-MacDockIconHandler *MacDockIconHandler::instance()
+
+MacNotificationHandler *MacNotificationHandler::instance()
 {
-    static MacDockIconHandler *s_instance = NULL;
+    static MacNotificationHandler *s_instance = NULL;
     if (!s_instance)
-        s_instance = new MacDockIconHandler();
+        s_instance = new MacNotificationHandler();
     return s_instance;
-}
-
-void MacDockIconHandler::handleDockIconClickEvent()
-{
-    if (this->mainWindow)
-    {
-        this->mainWindow->activateWindow();
-        this->mainWindow->show();
-    }
-
-    emit this->dockIconClicked();
 }
