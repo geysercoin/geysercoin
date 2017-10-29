@@ -1004,20 +1004,29 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     {
         nSubsidy = 300000 * COIN; //1% premine
     }
-        else if(pindexBest->nHeight >= 1 && pindexBest->nHeight<110880)
+        else if(pindexBest->nHeight >= 1 && pindexBest->nHeight < 110880)
     {
         nSubsidy = 3 * COIN;
     }
-        else if(pindexBest->nHeight >= 110880)
+        else if(pindexBest->nHeight >= 110880 && pindexBest->nHeight < 206640)
     {
         nSubsidy = 1.5 * COIN;
     }
-        else if(pindexBest->nHeight >= 201600)
+        else if(pindexBest->nHeight >= 206640 && pindexBest->nHeight < 208910)
     {
         nSubsidy = 0.75 * COIN;
     }
+        else if(pindexBest->nHeight >= 208910 && pindexBest->nHeight < 211680)
+    {
+        nSubsidy = 0.375 * COIN;
+    }
+        else if(pindexBest->nHeight >= 211680)
+    {
+        nSubsidy = 0.1875 * COIN;
+    }
     return nSubsidy + nFees;
 }
+
 
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
@@ -1026,11 +1035,11 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
 
      if(pindexBest->nHeight < GetLastPowBlock())
     {
-          nSubsidy = 0;  //default 10% yearly
+          nSubsidy = 0;  //default 0% yearly
     }
         else if(pindexBest->nHeight >= GetLastPowBlock())
     {
-          nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);  //default 30% yearly
+          nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);  //default 100% yearly
     }
     return nSubsidy + nFees;
 
@@ -1178,16 +1187,6 @@ void CBlock::UpdateTime(const CBlockIndex* pindexPrev)
 {
     nTime = max(GetBlockTime(), GetAdjustedTime());
 }
-
-
-
-
-
-
-
-
-
-
 
 bool CTransaction::DisconnectInputs(CTxDB& txdb)
 {
