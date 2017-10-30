@@ -1,4 +1,4 @@
-IDI_ICON1 ICON DISCARDABLE "icons/novacoin.ico"
+IDI_ICON1 ICON DISCARDABLE "icons/geysercoin.ico"
 
 #include <windows.h>             // needed for VERSIONINFO
 #include "../../clientversion.h" // holds the needed client version information
@@ -22,7 +22,7 @@ BEGIN
             VALUE "FileDescription",    "GeyserCoin-Qt (OSS GUI client for GeyserCoin)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "geysercoin-qt"
-            VALUE "LegalCopyright",     "2009-2014 The Bitcoin developers, 2012-2014 The NovaCoin & PPCoin developers, 2014 The BlackCoin developers"
+            VALUE "LegalCopyright",     "2009-2014 The Bitcoin developers, 2012-2014 The NovaCoin & PPCoin developers, 2014-2017 The BlackCoin developers, 2017 The GeyserCoin developers"
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
             VALUE "OriginalFilename",   "geysercoin-qt.exe"
             VALUE "ProductName",        "GeyserCoin-Qt"
