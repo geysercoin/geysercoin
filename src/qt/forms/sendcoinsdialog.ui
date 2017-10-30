@@ -789,7 +789,7 @@ background-image: url(:/images/bgbfree);</string>
          </property>
          <property name="styleSheet">
           <string notr="true">background-image: url(:/images/bgbfree);
-color: rgb(0, 0, 0);</string>
+color: rgb(153, 255, 51);</string>
          </property>
          <property name="text">
           <string>Balance:</string>
@@ -814,7 +814,7 @@ color: rgb(0, 0, 0);</string>
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(0, 0, 0);
+          <string notr="true">color: rgb(153, 255, 51);
 background-image: url(:/images/bgbfree);</string>
          </property>
          <property name="text">
