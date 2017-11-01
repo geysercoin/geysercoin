@@ -117,9 +117,9 @@ public:
         assert(hashGenesisBlock == uint256("0x00000f8c28f5ed6b3097af0be5d00f8cc240e5715322ee332d05722b539c3019"));
         assert(genesis.hashMerkleRoot == uint256("0x82088963398534e82c649f9069c5f79bfcd9744cb4c6a8fc5e5f5080b6a9d777"));
 
-        vSeeds.push_back(CDNSSeedData("nodea.geysercoin.net", "nodea.geysercoin.net"));
-        vSeeds.push_back(CDNSSeedData("nodeb.geysercoin.net", "nodeb.geysercoin.net"));
-        vSeeds.push_back(CDNSSeedData("nodec.geysercoin.net", "nodec.geysercoin.net"));
+        vSeeds.push_back(CDNSSeedData("nodea.geysercoin.com", "nodea.geysercoin.com"));
+        vSeeds.push_back(CDNSSeedData("nodeb.geysercoin.com", "nodeb.geysercoin.com"));
+        vSeeds.push_back(CDNSSeedData("nodec.geysercoin.com", "nodec.geysercoin.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(38);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(63);
