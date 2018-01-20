@@ -81,6 +81,7 @@ CoinControlDialog::CoinControlDialog(QWidget *parent) :
 
     ui->labelCoinControlQuantity->addAction(clipboardQuantityAction);
     ui->labelCoinControlAmount->addAction(clipboardAmountAction);
+    ui->labelCoinControlAmount->setStyleSheet("QLabel { color: green; }");
     ui->labelCoinControlFee->addAction(clipboardFeeAction);
     ui->labelCoinControlAfterFee->addAction(clipboardAfterFeeAction);
     ui->labelCoinControlBytes->addAction(clipboardBytesAction);

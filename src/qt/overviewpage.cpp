@@ -120,7 +120,7 @@ OverviewPage::OverviewPage(QWidget *parent) :
 
     if (fUseBlackTheme)
     {
-        const char* whiteLabelQSS = "QLabel { color: rgb(153, 255, 51); }";
+        const char* whiteLabelQSS = "QLabel { color: rgb(0, 0, 0); }";
         ui->labelBalance->setStyleSheet(whiteLabelQSS);
         ui->labelStake->setStyleSheet(whiteLabelQSS);
         ui->labelUnconfirmed->setStyleSheet(whiteLabelQSS);

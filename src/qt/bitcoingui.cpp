@@ -323,7 +323,7 @@ void BitcoinGUI::createActions()
 void BitcoinGUI::createMenuBar()
 {
     appMenuBar = new QMenuBar();
-    appMenuBar->setStyleSheet("background-image: url(:/images/bgb);background-repeat: no-repeat; color: rgb(204, 255, 153);");
+    appMenuBar->setStyleSheet("background-image: url(:/images/bgb);background-repeat: no-repeat; color: rgb(0, 0, 0);");
     // Configure the menus
     QMenu *file = appMenuBar->addMenu(tr("&File"));
     file->addAction(backupWalletAction);
@@ -363,7 +363,7 @@ static QWidget* makeToolBarSpacer()
 void BitcoinGUI::createToolBars()
 {
     toolbar = new QToolBar(tr("Tabs toolbar"));
-    toolbar->setStyleSheet("QWidget { background-repeat: no-repeat; background-image: url(:/images/bkg); border-color: red; color: rgb(204, 255, 153);}");
+    toolbar->setStyleSheet("QWidget { background-repeat: no-repeat; background-image: url(:/images/bkg_n); border-color: red; color: rgb(0, 0, 0);}");
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar->setContextMenuPolicy(Qt::PreventContextMenu);
 
@@ -452,9 +452,9 @@ void BitcoinGUI::setWalletModel(WalletModel *walletModel)
 
         // Put transaction list in tabs
         transactionView->setModel(walletModel);
-        transactionView->setStyleSheet("QWidget { background-image: url(:/images/bgb); background-repeat: repeat; gridline-color: rgb(255, 255, 255); color: rgb(204, 255, 153);selection-background-color: darkgray; alternate-background-color: blue;border-top-color: red;selection-color: blue; }");
+        transactionView->setStyleSheet("QWidget { background-image: url(:/images/bgb); background-repeat: repeat; gridline-color: rgb(255, 255, 255); color: rgb(0, 0, 0);selection-background-color: darkgray; alternate-background-color: blue;border-top-color: red;selection-color: blue; }");
         overviewPage->setWalletModel(walletModel);
-        overviewPage->setStyleSheet("background-image: none; background-repeat: no-repeat; color: rgb(191, 255, 128) ;");
+        overviewPage->setStyleSheet("background-image: none; background-repeat: no-repeat; color: rgb(0, 0, 0) ;");
         addressBookPage->setModel(walletModel->getAddressTableModel());
         receiveCoinsPage->setModel(walletModel->getAddressTableModel());
         sendCoinsPage->setModel(walletModel);

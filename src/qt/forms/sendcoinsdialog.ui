@@ -335,8 +335,10 @@ background-image: url(:/images/bgbfree);</string>
                 <widget class="QLabel" name="labelCoinControlAmount">
                  <property name="font">
                   <font>
-                   <family>Monospace</family>
+                   <family>MS Shell Dlg 2</family>
                    <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
                   </font>
                  </property>
                  <property name="cursor">
@@ -683,7 +685,7 @@ background-image: url(:/images/bgbfree);</string>
         <x>0</x>
         <y>0</y>
         <width>830</width>
-        <height>152</height>
+        <height>172</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">

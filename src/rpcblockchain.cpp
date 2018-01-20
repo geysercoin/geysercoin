@@ -18,10 +18,14 @@ double GetDifficulty(const CBlockIndex* blockindex)
 {
     // Floating point number that is a multiple of the minimum difficulty,
     // minimum difficulty = 1.0.
-    if (blockindex == NULL)
+    if (blockindex == NULL || nBestHeight == GetLastPowBlock() - 10080)
     {
         if (pindexBest == NULL)
+        {
             return 1.0;
+        }else
+            if(nBestHeight == GetLastPowBlock() - 10080)
+            return 0.00024414;
         else
             blockindex = GetLastBlockIndex(pindexBest, false);
     }
