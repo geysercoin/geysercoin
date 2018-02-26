@@ -18,11 +18,12 @@ double GetDifficulty(const CBlockIndex* blockindex)
 {
     // Floating point number that is a multiple of the minimum difficulty,
     // minimum difficulty = 1.0.
-    if (blockindex == NULL )
+    if (blockindex == NULL)
     {
-        return 1.0;
-    }else
-        blockindex = GetLastBlockIndex(pindexBest, false);
+        if (pindexBest == NULL)
+            return 1.0;
+        else
+            blockindex = GetLastBlockIndex(pindexBest, false);
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
