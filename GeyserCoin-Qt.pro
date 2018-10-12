@@ -28,6 +28,8 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
+#uncomment thish block for windows app making
+
 #BOOST_LIB_SUFFIX=-mgw49-mt-s-1_51
 #BOOST_INCLUDE_PATH=C:/deps/boost_1_51_0
 #BOOST_LIB_PATH=C:/deps/boost_1_51_0/stage/lib
@@ -110,6 +112,8 @@ SOURCES += src/txdb-leveldb.cpp
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
     genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
+    #uncomment this for making leveldb for windows
+	#genleveldb.commands = cd $$PWD/src/leveldb && TARGET_OS=NATIVE_WINDOWS make libleveldb.a libmemenv.a
 } else {
     # make an educated guess about what the ranlib command is called
     isEmpty(QMAKE_RANLIB) {

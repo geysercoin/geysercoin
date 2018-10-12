@@ -1049,7 +1049,7 @@ int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, i
     {
        nSubsidy = nCoinAge * 65 * CENT * 33 / (365 * 33 + 8);  //default 65% yearly
     }
-		else if(pindexBest->nHeight >= GetLastPowBlock() && pindexBest->nHeight > 645120)
+		else if(pindexBest->nHeight >= GetLastPowBlock() && pindexBest->nHeight >= 645120)
     {
           nSubsidy = nCoinAge * 35 * CENT * 33 / (365 * 33 + 8);  //default 35% yearly
     }
